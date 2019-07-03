@@ -9,6 +9,8 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * Author: dyh
@@ -39,5 +41,19 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
+
+    @Bean
+    public JedisPool redisPoolFactory()  throws Exception{
+        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
+//        jedisPoolConfig.setMaxIdle(maxIdle);
+//        jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
+//        // 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true
+//        jedisPoolConfig.setBlockWhenExhausted(blockWhenExhausted);
+        // 是否启用pool的jmx管理功能, 默认true
+        jedisPoolConfig.setJmxEnabled(true);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, "localhost", 6379, 20000, "");
+        return jedisPool;
+    }
+
 
 }
