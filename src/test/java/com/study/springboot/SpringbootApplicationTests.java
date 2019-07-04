@@ -54,7 +54,7 @@ public class SpringbootApplicationTests {
 //		}
 		jedis.close();
 	}
-
+	//hyperloglog
 	@Test
 	public void pfadd() {
 		Jedis jedis = jedisPool.getResource();
@@ -68,7 +68,7 @@ public class SpringbootApplicationTests {
 		System.out.println(jedis.pfcount("codehole3"));
 		jedis.close();
 	}
-
+	//简单限流
 	@Test
 	public void simpleRateLimiter() throws IOException, InterruptedException {
 		Jedis jedis = new Jedis();
@@ -80,4 +80,6 @@ public class SpringbootApplicationTests {
 		}
 
 	}
+
+
 }
