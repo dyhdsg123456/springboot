@@ -41,7 +41,12 @@ public class SpringbootApplicationTests {
 //		redisUtil.del("user");
 	}
 
-
+	@Test
+	public void delete() {
+		for (int i=0;i<10000;i++){
+			redisUtil.del("key"+i);
+		}
+	}
 	@Test
 	public void test1() {
 		Jedis jedis = jedisPool.getResource();
